@@ -179,6 +179,10 @@ The pin assignment:
 - GP6: DSR
 - GP7: CTS
 
+Note: On PL2303HXC it would be:
+- GP2: EEDATA (pin14)
+- GP3: EECLK (pin13)
+
 The registers assignment:
 
 ### Register 0x01: GPIO 0, 1 type and value
@@ -218,9 +222,20 @@ The values:
 Remember: it reads as 0x87, and also useful to maintain a shadow of it.
 
 
+### PL2303HXC only: Register 0x0c: GPIO 2, 3 type
+
+- bits 0,1: GP2 type
+- bits 2,3: GP3 type
+
+
+### PL2303HXC only: Register 0x0d: GPIO 2, 3 value
+- bit 0: GP2 (EEDATA)
+- bit 1: GP3 (EECLK)
+
+
 ## Conclusion
 
-We have
+On PL2303HX we have
 - 2 in/out ports: GP0,1
 - 2 out-only ports: GP2,3
 - 4 in/out/pulldown ports: GP4..7

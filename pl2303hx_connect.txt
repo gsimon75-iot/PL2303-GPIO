@@ -1,0 +1,168 @@
+                +------------------- bmRequestType
+                |  +---------------- bRequest
+                |  |  +------------- wValue
+                |  |  |     +------- wIndex
+                |  |  |     |     +- wLength
+idx  ep dir     |  |  |     |     |
+---  -- ---     -----------------------
+
+   1 00 out     00 05 02 00 00 00 00 00
+                set_address 2
+   2 00
+
+   3 00 out 
+                status
+   4 00
+
+   5 80 out     80 06 00 01 00 00 08 00
+   		get_descriptor desc_type_device, wLength=0x08
+   6 80 in      12 01 10 01 00 00 00 40
+   		bLength 	= 0x12
+		bDescriptorType	= 0x01   = desc_type_device
+		bcdUSB		= 0x0110 = usb 1.1
+		bDeviceClass	= 0x00
+		bDeviceSubClass	= 0x00
+		bDeviceProtocol	= 0x00
+		bMaxPacketSize0	= 0x40
+               
+   7 80 out     80 06 00 01 00 00 12 00
+   		get_descriptor desc_type_device, wLength=0x12
+   8 80 in      12 01 10 01 00 00 00 40 7b 06 03 23 00 03 01 02 00 01
+   		bLength 	= 0x12
+		bDescriptorType	= 0x01		= desc_type_device
+		bcdUSB		= 0x0110	= usb 1.1
+		bDeviceClass	= 0x00
+		bDeviceSubClass	= 0x00
+		bDeviceProtocol	= 0x00
+		bMaxPacketSize0	= 0x40
+		idVendor	= 0x067b
+		idProduct	= 0x2303
+		bcdDevice	= 0x0300
+		iManufacturer	= 0x01
+		iProduct	= 0x02
+		iSerialNumber	= 0x00		= missing
+		bNumConfiguration = 0x01
+               
+   9 80 out     80 06 00 03 00 00 02 00
+   		get_descriptor desc_type_string, idx=0, wLength=0x02
+  10 80 in      04 03
+  		bLength		= 0x04
+  		bDescriptorType	= 0x03		= desc_type_string
+               
+  11 80 out     80 06 00 03 00 00 04 00
+   		get_descriptor desc_type_string, idx=0, wLength=0x04
+  12 80 in      04 03 09 04
+  		bLength		= 0x04
+  		bDescriptorType	= 0x03		= desc_type_string
+  		content		= 09 04		= LCID(en-US)
+               
+  13 80 out     80 06 01 03 09 04 02 00
+   		get_descriptor desc_type_string, idx=1, ?lang=en-US?, wLength=0x02
+  14 80 in      32 03
+  		bLength		= 0x32
+  		bDescriptorType	= 0x03		= desc_type_string
+               
+  15 80 out     80 06 01 03 09 04 32 00
+   		get_descriptor desc_type_string, idx=1, ?lang=en-US?, wLength=0x32
+  16 80 in      32 03 50 00 72 00 6f 00 6c 00 69 00 66 00 69 00 63 00 20 00 54 00 65 00 63 00 68 00 6e 00 6f 00 6c 00 6f 00 67 00 79 00 20 00 49 00 6e 00 63 00 2e 00
+  		bLength		= 0x32
+  		bDescriptorType	= 0x03		= desc_type_string
+		content		= "Prolific Technology Inc."
+               
+  17 80 out     80 06 02 03 09 04 02 00
+   		get_descriptor desc_type_string, idx=2, wLength=0x02
+  18 80 in      2c 03
+  		bLength		= 0x2c
+  		bDescriptorType	= 0x03		= desc_type_string
+               
+  19 80 out     80 06 02 03 09 04 2c 00
+   		get_descriptor desc_type_string, idx=2, wLength=0x2c
+  20 80 in      2c 03 55 00 53 00 42 00 2d 00 53 00 65 00 72 00 69 00 61 00 6c 00 20 00 43 00 6f 00 6e 00 74 00 72 00 6f 00 6c 00 6c 00 65 00 72 00
+  		bLength		= 0x2c
+  		bDescriptorType	= 0x03		= desc_type_string
+		content		= "USB-Serial Controller"
+               
+  21 80 out     80 06 00 02 00 00 09 00
+   		get_descriptor desc_type_config, idx=0, wLength=0x09
+  22 80 in      09 02 27 00 01 01 00 80 32
+  		bLength		= 0x09
+		bDescriptorType = 0x02		= desc_type_config
+		wTotalLength	= 0x27
+		bNumInterfaces	= 0x01
+		bConfigurationValue = 0x01
+		iConfiguration	= 0x00
+		bmAttributes	= 0x80
+		bMaxPower	= 0x32
+               
+  23 80 out     80 06 00 02 00 00 27 00
+   		get_descriptor desc_type_config, idx=0, wLength=0x27
+  24 80 in      09 02 27 00 01 01 00 80 32 09 04 00 00 03 ff 00 00 00 07 05 81 03 0a 00 01 07 05 02 02 40 00 00 07 05 83 02 40 00 00
+  		bLength		= 0x09
+		bDescriptorType = 0x02		= desc_type_config
+		wTotalLength	= 0x27
+		bNumInterfaces	= 0x01
+		bConfigurationValue = 0x01
+		iConfiguration	= 0x00
+		bmAttributes	= 0x80
+		bMaxPower	= 0x32
+		content		= ?
+               
+  25 00 out     00 09 01 00 00 00 00 00
+  		set_configuration idx=1
+  26 00        
+               
+  27 00 out     40 01 00 00 00 00 00 00
+  		out+vendor+device, bRequest=1, wValue=0, wIndex=0, wLength=0
+  28 00        
+               
+  29 00 out     40 01 08 00 00 00 00 00
+  		out+vendor+device, bRequest=1, wValue=8, wIndex=0, wLength=0
+  30 00        
+               
+  31 00 out     40 01 09 00 00 00 00 00
+  		out+vendor+device, bRequest=1, wValue=9, wIndex=0, wLength=0
+  32 00        
+               
+  33 80 out     c0 01 84 84 00 00 01 00
+  		in+vendor+device, bRequest=1, wValue=0x8484, wIndex=0, wLength=1
+  34 80 in      02
+               
+  35 00 out     40 01 04 04 00 00 00 00
+  		out+vendor+device, bRequest=1, wValue=0x0404, wIndex=0, wLength=0
+  36 00        
+               
+  37 80 out     c0 01 84 84 00 00 01 00
+  		in+vendor+device, bRequest=1, wValue=0x8484, wIndex=0, wLength=1
+  38 80 in      02
+               
+  39 80 out     c0 01 83 83 00 00 01 00
+  		in+vendor+device, bRequest=1, wValue=0x8383, wIndex=0, wLength=1
+  40 80 in      00
+               
+  41 80 out     c0 01 84 84 00 00 01 00
+  		in+vendor+device, bRequest=1, wValue=0x8484, wIndex=0, wLength=1
+  42 80 in      02
+               
+  43 00 out     40 01 04 04 01 00 00 00
+  		out+vendor+device, bRequest=1, wValue=0x0404, wIndex=1, wLength=0
+  44 00        
+               
+  45 80 out     c0 01 84 84 00 00 01 00
+  		in+vendor+device, bRequest=1, wValue=0x8484, wIndex=0, wLength=1
+  46 80 in      02
+               
+  47 80 out     c0 01 83 83 00 00 01 00
+  		in+vendor+device, bRequest=1, wValue=0x8383, wIndex=0, wLength=1
+  48 80 in      00
+               
+  49 00 out     40 01 00 00 01 00 00 00
+  		out+vendor+device, bRequest=1, wValue=0, wIndex=1, wLength=0
+  50 00        
+               
+  51 00 out     40 01 01 00 00 00 00 00
+  		out+vendor+device, bRequest=1, wValue=1, wIndex=0, wLength=0
+  52 00        
+               
+  53 00 out     40 01 02 00 44 00 00 00
+  		out+vendor+device, bRequest=1, wValue=2, wIndex=0x44, wLength=0
+  54 00        
