@@ -1,4 +1,4 @@
-TARGETS		= test
+TARGETS		= test spi_eeprom
 
 CXX		= g++
 
@@ -17,5 +17,9 @@ clean:
 		$(CXX) -c $(CXXFLAGS) $^
 
 test:		test.o
+		$(CXX) -o $@ $^ $(LDFLAGS) $(LDLIBS)
+
+
+spi_eeprom:	spi_eeprom.o
 		$(CXX) -o $@ $^ $(LDFLAGS) $(LDLIBS)
 
